@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#741630">
+<meta name="description" content="BTHO Obesity is a student-focused educational guide to obesity, healthy habits, and wellness resources for Texas A&M students.">
+<title>BTHO Obesity | Aggie Wellness Guide</title>
+<style>
+:root{
+  --maroon:#741630;--maroon-dark:#4c1022;--maroon-light:#f7e9ed;
+  --cream:#fffdf9;--paper:#fff;--ink:#29242a;--muted:#655a60;
+  --line:#e8dce0;--gold:#d7a94b;--green:#28634d;--shadow:0 12px 30px rgba(67,22,38,.08);
+  --radius:18px;--max:1120px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--maroon);text-underline-offset:3px}
+a:hover{color:#a12b4c}
+button,input{font:inherit}
+button,a{touch-action:manipulation}
+:focus-visible{outline:3px solid #d6a342;outline-offset:3px}
+.skip-link{position:absolute;left:-9999px;top:10px;background:white;padding:10px;z-index:1000}
+.skip-link:focus{left:10px}
+.wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(255,253,249,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-row{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--maroon-dark);font-weight:900;letter-spacing:.2px}
+.brand-mark{display:grid;place-items:center;background:var(--maroon);color:white;font-weight:950;font-size:14px;border-radius:11px;width:47px;height:43px;letter-spacing:-.5px}
+.brand-text small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.7px;text-transform:uppercase;font-weight:800}
+nav{display:flex;align-items:center;gap:20px}
+nav a{text-decoration:none;font-size:13px;font-weight:750;color:#49343b}
+nav a:hover{color:var(--maroon);text-decoration:underline}
+.menu-toggle{display:none;border:1px solid var(--line);background:white;border-radius:10px;padding:8px 12px;color:var(--maroon);font-weight:800}
+.hero{background:linear-gradient(120deg,var(--maroon-dark),var(--maroon) 70%,#8d2745);color:white;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:400px;height:400px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-120px;top:-190px;box-shadow:0 0 0 45px rgba(255,255,255,.035),0 0 0 95px rgba(255,255,255,.025)}
+.hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:35px;align-items:center;padding-block:76px;position:relative;z-index:1}
+.eyebrow{font-size:12px;font-weight:850;letter-spacing:2px;text-transform:uppercase;color:#f4d8e0}
+h1,h2,h3{line-height:1.17;margin-top:0}
+h1{font-size:clamp(2.6rem,6vw,4.8rem);letter-spacing:-2px;margin:17px 0 20px;max-width:760px}
+.hero p{color:#ffedf2;font-size:18px;max-width:660px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:10px;border:1px solid transparent;padding:12px 17px;font-weight:850;font-size:14px;text-decoration:none;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:white;color:var(--maroon)}
+.btn-outline{border-color:#e8bac8;color:white;background:transparent}
+.btn-maroon{background:var(--maroon);color:white}
+.btn-light{background:var(--maroon-light);color:var(--maroon)}
+.hero-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:25px}
+.hero-card .big-icon{font-size:43px}
+.hero-card h2{font-size:23px;margin:10px 0}
+.hero-card p{font-size:14px;margin-bottom:0}
+.pill{display:inline-flex;background:#f4dce3;color:var(--maroon);border-radius:100px;padding:6px 11px;font-size:11px;font-weight:900;letter-spacing:.6px;text-transform:uppercase}
+.section{padding:74px 0}
+.section.soft{background:#f8f0f2}
+.section.white{background:white}
+.section-head{max-width:730px;margin-bottom:30px}
+.section h2{font-size:clamp(1.9rem,4vw,2.65rem);letter-spacing:-.8px;color:var(--maroon-dark);margin:12px 0}
+.lead{color:var(--muted);font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 4px 14px rgba(67,22,38,.025)}
+.card h3{font-size:19px;color:var(--maroon-dark);margin:12px 0 9px}
+.card p{color:var(--muted);margin:0}
+.icon-box{display:grid;place-items:center;width:49px;height:49px;border-radius:14px;background:var(--maroon-light);font-size:25px}
+.small-label{font-size:11px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;color:var(--maroon)}
+.notice{border-left:4px solid var(--gold);background:#fff5df;padding:15px 17px;border-radius:0 12px 12px 0;color:#493c25;font-size:14px;margin-top:22px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:start}
+.myth-list{display:grid;gap:12px}
+.myth{background:white;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.myth button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:14px;border:0;background:white;padding:17px 18px;text-align:left;color:var(--maroon-dark);font-weight:800;cursor:pointer}
+.myth button .plus{font-size:22px;color:var(--maroon);flex:none}
+.myth-answer{display:none;padding:0 18px 18px;color:var(--muted);font-size:14px}
+.myth-answer.open{display:block}
+.myth-answer strong{color:var(--maroon)}
+.habit-list{list-style:none;padding:0;margin:0}
+.habit-list li{padding:17px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:35px 1fr;gap:13px}
+.habit-list li:last-child{border-bottom:0}
+.habit-num{display:grid;place-items:center;width:30px;height:30px;background:var(--maroon-light);color:var(--maroon);border-radius:50%;font-weight:900}
+.habit-list strong{display:block;color:var(--maroon-dark);margin-bottom:4px}
+.habit-list span{color:var(--muted);font-size:14px}
+.resource-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 24px}
+.search-wrap{flex:1;min-width:230px}
+.search-wrap input{width:100%;padding:12px 14px;border:1px solid #d9c8ce;border-radius:10px;background:white;color:var(--ink)}
+.resource-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.resource-card .resource-icon{font-size:27px}
+.resource-card h3{margin:0}
+.resource-card p{font-size:14px}
+.resource-card a{font-weight:850;font-size:14px;margin-top:auto}
+.resource-card .kind{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--maroon);font-weight:900}
+.no-results{display:none;padding:20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}
+.source-list{padding-left:22px}
+.source-list li{margin:13px 0;color:var(--muted)}
+.source-list a{font-weight:800}
+.steps{counter-reset:steps;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.step{padding:22px;border-radius:15px;background:white;border:1px solid var(--line)}
+.step-number{font-size:12px;color:var(--maroon);font-weight:950;letter-spacing:1px}
+.step h3{margin:10px 0;color:var(--maroon-dark)}
+.step p{font-size:14px;color:var(--muted);margin:0}
+.cta{background:var(--maroon);color:white;border-radius:22px;padding:36px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.cta h2{color:white;margin:10px 0;font-size:clamp(1.7rem,4vw,2.4rem)}
+.cta p{color:#f6e2e8;max-width:650px;margin-bottom:0}
+footer{background:#291820;color:#f7eaf0;padding:35px 0}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+footer p,footer small{color:#e0cbd2;font-size:13px}
+footer a{color:#ffe0e9}
+.footer-links{display:flex;gap:13px;flex-wrap:wrap;font-size:13px}
+.disclaimer{border-top:1px solid #64404e;margin-top:24px;padding-top:18px;font-size:12px;color:#e0cbd2}
+.back-top{position:fixed;right:18px;bottom:18px;border:0;border-radius:50%;width:44px;height:44px;background:var(--maroon);color:white;box-shadow:var(--shadow);font-size:19px;cursor:pointer;display:none}
+.back-top.visible{display:block}
+@media(max-width:850px){
+ .hero-grid{grid-template-columns:1fr;padding-block:55px}.hero-card{max-width:520px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .two-col{grid-template-columns:1fr;gap:20px}
+ .steps{grid-template-columns:1fr}
+ nav{gap:12px}
+}
+@media(max-width:650px){
+ .wrap{width:min(var(--max),calc(100% - 28px))}
+ .nav-row{min-height:68px;flex-wrap:wrap;padding-block:10px}
+ .menu-toggle{display:inline-block}
+ nav{display:none;order:3;width:100%;padding:7px 0 12px;flex-direction:column;align-items:flex-start}
+ nav.open{display:flex}
+ .grid,.grid.two{grid-template-columns:1fr}
+ .section{padding:54px 0}
+ .hero-grid{padding-block:47px}
+ h1{letter-spacing:-1.2px}
+ .cta{padding:25px;align-items:flex-start;flex-direction:column}
+ .footer-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header>
+  <div class="wrap nav-row">
+    <a class="brand" href="#home" aria-label="BTHO Obesity home">
+      <span class="brand-mark">BTHO</span>
+      <span class="brand-text">BTHO Obesity<small>Aggie wellness guide</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">☰ Menu</button>
+    <nav id="mainNav" aria-label="Main navigation">
+      <a href="#learn">Learn</a><a href="#myths">Myths &amp; facts</a><a href="#habits">Healthy habits</a><a href="#resources">Aggie resources</a><a href="#sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Student wellness · Start with knowledge</span>
+      <h1>Better information.<br>Healthier possibilities.</h1>
+      <p>College life gets busy. BTHO Obesity helps Aggies understand obesity, explore everyday wellness habits, and find trustworthy resources—without judgment or unrealistic expectations.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#learn">Explore the guide <span aria-hidden="true">↓</span></a>
+        <a class="btn btn-outline" href="#resources">Find Aggie resources</a>
+      </div>
+    </div>
+    <aside class="hero-card" aria-label="About this guide">
+      <div class="big-icon" aria-hidden="true">🌱</div>
+      <span class="pill">Learn at your own pace</span>
+      <h2>Wellness is more than a number.</h2>
+      <p>Explore the many factors that affect health, discover realistic ideas for student life, and learn where to find support when you need it.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="mission-heading">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="small-label">Our mission</span>
+      <h2 id="mission-heading">Knowledge is a place to start.</h2>
+      <p class="lead">BTHO Obesity is a student-focused educational concept intended to make credible information and campus resources easier to find. Our goal is to encourage informed choices and support overall well-being—not to diagnose anyone or promise a single solution.</p>
+    </div>
+    <div class="grid">
+      <article class="card"><div class="icon-box" aria-hidden="true">📚</div><h3>Understand the facts</h3><p>Learn about obesity and the many factors that can affect health.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🌱</div><h3>Start with small steps</h3><p>Explore realistic ideas that fit a busy student schedule, budget, and individual needs.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🤝</div><h3>Find support</h3><p>Connect with trusted health, nutrition, and food-access resources.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="learn">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="small-label">01 · Learn</span>
+      <h2>What should students know about obesity?</h2>
+      <p class="lead">Obesity is a complex chronic health condition associated with excess body fat and potential health risks. It is influenced by multiple interacting factors. A person's body size alone does not tell their whole health story.</p>
+    </div>
+    <div class="grid">
+      <article class="card"><div class="icon-box" aria-hidden="true">🧬</div><h3>Biology and family history</h3><p>Genetics, hormones, health conditions, and some medications can influence body weight.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🥗</div><h3>Daily habits</h3><p>Eating patterns, movement, sleep, and stress can all play a role in health.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🏙️</div><h3>Environment and access</h3><p>Time, finances, food availability, safe places to move, and access to care can shape people's options.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">💚</div><h3>Health is more than weight</h3><p>Well-being includes physical health, mental health, sleep, energy, and access to appropriate care.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🩺</div><h3>Personalized care matters</h3><p>Health needs differ. Qualified health professionals can help people understand their own risks and options.</p></article>
+      <article class="card"><div class="icon-box" aria-hidden="true">🫶</div><h3>Respect matters</h3><p>Stigma and blame do not help people access care. Everyone deserves respectful, nonjudgmental support.</p></article>
+    </div>
+    <div class="notice"><strong>Keep in mind:</strong> This guide provides general education, not an individual diagnosis or treatment plan. If you have personal health concerns, talk with a qualified healthcare professional.</div>
+  </div>
+</section>
+
+<section class="section white" id="myths">
+  <div class="wrap two-col">
+    <div class="section-head">
+      <span class="small-label">02 · Myth or fact?</span>
+      <h2>Challenge what you think you know.</h2>
+      <p class="lead">Select each statement to reveal an explanation. This is a self-guided learning activity, not a test of your personal health.</p>
+      <p>Understanding the full picture can help us replace oversimplified assumptions with better information and more compassionate conversations.</p>
+    </div>
+    <div class="myth-list">
+      <article class="myth"><button type="button" aria-expanded="false"><span>“Obesity is caused only by a lack of willpower.”</span><span class="plus" aria-hidden="true">＋</span></button><div class="myth-answer"><strong>Myth.</strong> Body weight is affected by many factors, including biology, genetics, medications, sleep, stress, and environment. Blaming individuals oversimplifies a complex health issue.</div></article>
+      <article class="myth"><button type="button" aria-expanded="false"><span>“Sleep can be part of overall health.”</span><span class="plus" aria-hidden="true">＋</span></button><div class="myth-answer"><strong>Fact.</strong> Sleep is one of several factors associated with weight and health. Many adults ages 18–64 are advised to aim for 7–9 hours of sleep per night, although individual needs can vary.</div></article>
+      <article class="myth"><button type="button" aria-expanded="false"><span>“Healthy habits must be expensive or time-consuming.”</span><span class="plus" aria-hidden="true">＋</span></button><div class="myth-answer"><strong>Myth.</strong> Some changes can be simple, such as planning a few meals, carrying a refillable water bottle, taking movement breaks, or looking into available food resources. Not every option is accessible to every student, and support matters.</div></article>
+      <article class="myth"><button type="button" aria-expanded="false"><span>“People can have different health needs at the same body size.”</span><span class="plus" aria-hidden="true">＋</span></button><div class="myth-answer"><strong>Fact.</strong> Body size alone cannot establish an individual's health status. A qualified health professional can help assess personal concerns in context.</div></article>
+      <article class="myth"><button type="button" aria-expanded="false"><span>“One diet or routine works for everyone.”</span><span class="plus" aria-hidden="true">＋</span></button><div class="myth-answer"><strong>Myth.</strong> Health, culture, finances, food access, disability, schedules, and personal preferences differ. A sustainable approach should fit an individual's circumstances, and professional guidance may be useful.</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="habits">
+  <div class="wrap two-col">
+    <div class="section-head">
+      <span class="small-label">03 · Everyday wellness</span>
+      <h2>Small steps for real college life.</h2>
+      <p class="lead">You do not need to change everything at once. Choose ideas that are realistic for your schedule, budget, needs, and preferences.</p>
+      <div class="notice"><strong>No perfection required.</strong> These ideas are options to explore—not rules to judge yourself by. Adapt them to your abilities, health needs, and circumstances.</div>
+    </div>
+    <ol class="habit-list">
+      <li><span class="habit-num">1</span><div><strong>Make meal planning easier</strong><span>Plan a few meals or snacks ahead, use a grocery list, and consider affordable foods that fit your needs.</span></div></li>
+      <li><span class="habit-num">2</span><div><strong>Build balanced meals</strong><span>When practical, combine foods such as fruits or vegetables, whole grains, and protein sources. There is no single perfect meal plan for everyone.</span></div></li>
+      <li><span class="habit-num">3</span><div><strong>Add movement that works for you</strong><span>Try a walk between classes, stretch during study breaks, or explore an activity you enjoy. Adapt movement to your abilities and health needs.</span></div></li>
+      <li><span class="habit-num">4</span><div><strong>Protect your sleep</strong><span>Consider a consistent sleep and wake time and a wind-down routine, especially during demanding academic weeks.</span></div></li>
+      <li><span class="habit-num">5</span><div><strong>Care for your mental well-being</strong><span>Take breaks, connect with supportive people, and seek professional help when you need it.</span></div></li>
+      <li><span class="habit-num">6</span><div><strong>Ask for support when helpful</strong><span>A registered dietitian or healthcare professional can help you make decisions suited to your circumstances.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="resources">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="small-label">04 · Your Aggie resource guide</span>
+      <h2>Support is closer than you think.</h2>
+      <p class="lead">Start with these Texas A&amp;M and public-health resources. Services, costs, eligibility, and appointment availability can change, so check each provider's website for current details.</p>
+    </div>
+    <div class="resource-tools">
+      <label class="search-wrap"><span class="small-label">Search resources</span><input id="resourceSearch" type="search" placeholder="Try “food”, “nutrition”, or “mental health”" aria-label="Search resource cards"></label>
+    </div>
+    <div class="grid" id="resourceGrid">
+      <article class="card resource-card" data-search="medical doctor health services student clinic care"><div class="resource-icon" aria-hidden="true">🩺</div><span class="kind">Medical care</span><h3>University Health Services</h3><p>Explore student medical care, wellness support, and available services.</p><a href="https://uhs.tamu.edu/" target="_blank" rel="noopener noreferrer">Visit University Health Services ↗</a></article>
+      <article class="card resource-card" data-search="nutrition dietitian food meal plan healthy eating"><div class="resource-icon" aria-hidden="true">🥗</div><span class="kind">Nutrition</span><h3>Nutrition Services</h3><p>Explore university medical and nutrition service information. Confirm current dietitian appointment options and costs directly with UHS.</p><a href="https://uhs.tamu.edu/medical/index.html" target="_blank" rel="noopener noreferrer">Explore medical services ↗</a></article>
+      <article class="card resource-card" data-search="mental health counseling stress emotional support"><div class="resource-icon" aria-hidden="true">🧠</div><span class="kind">Mental well-being</span><h3>Mental Health Support</h3><p>Explore counseling, mental health services, and support options available to students.</p><a href="https://uhs.tamu.edu/mental-health/index.html" target="_blank" rel="noopener noreferrer">Explore mental health care ↗</a></article>
+      <article class="card resource-card" data-search="food pantry food assistance affordable groceries emergency meals"><div class="resource-icon" aria-hidden="true">🥫</div><span class="kind">Food access</span><h3>Food Resources</h3><p>Look for information about food pantries, emergency meal support, and food assistance.</p><a href="https://studentlife.tamu.edu/" target="_blank" rel="noopener noreferrer">Visit Texas A&amp;M Student Life ↗</a></article>
+      <article class="card resource-card" data-search="nutrition education fuel thrive meal planning grocery shopping"><div class="resource-icon" aria-hidden="true">🍎</div><span class="kind">Nutrition education</span><h3>Fuel to Thrive</h3><p>Explore Texas A&amp;M nutrition and wellness education. Check the university site for current program information.</p><a href="https://uhs.tamu.edu/prevention/index.html" target="_blank" rel="noopener noreferrer">Explore prevention programs ↗</a></article>
+      <article class="card resource-card" data-search="physical activity exercise fitness recreation campus movement"><div class="resource-icon" aria-hidden="true">🏃</div><span class="kind">Movement and wellness</span><h3>Campus Wellness</h3><p>Explore university wellness and health promotion programs that support student well-being.</p><a href="https://uhs.tamu.edu/prevention/index.html" target="_blank" rel="noopener noreferrer">Explore wellness programs ↗</a></article>
+    </div>
+    <p class="no-results" id="noResults">No matching resource cards. Try a broader search term, or browse all resources above.</p>
+    <div class="notice"><strong>Before relying on a resource:</strong> Verify the service name, current URL, eligibility, costs, and appointment process. This student-created prototype is not an official university directory.</div>
+  </div>
+</section>
+
+<section class="section white" id="sources">
+  <div class="wrap two-col">
+    <div class="section-head">
+      <span class="small-label">05 · Research and further reading</span>
+      <h2>Go beyond the basics.</h2>
+      <p class="lead">The information on this site should be supported by reliable research. These public-health sources are a starting point for learning more about obesity, health, and weight management.</p>
+      <p>For a final academic version, your team should review each source, make sure claims are supported by the cited material, and format references according to your course requirements.</p>
+    </div>
+    <div>
+      <ul class="source-list">
+        <li><a href="https://www.cdc.gov/obesity/risk-factors/risk-factors.html" target="_blank" rel="noopener noreferrer">Centers for Disease Control and Prevention — Risk Factors for Obesity.</a><br>Information about biological, behavioral, and environmental factors.</li>
+        <li><a href="https://www.niddk.nih.gov/health-information/weight-management/adult-overweight-obesity" target="_blank" rel="noopener noreferrer">National Institute of Diabetes and Digestive and Kidney Diseases — Understanding Adult Overweight &amp; Obesity.</a><br>An overview of contributing factors, health risks, and treatment options.</li>
+        <li><a href="https://www.niddk.nih.gov/health-information/weight-management/adult-overweight-obesity/factors-affecting-weight-health" target="_blank" rel="noopener noreferrer">NIDDK — Factors Affecting Weight and Health.</a><br>Information about sleep, genetics, health conditions, medications, lifestyle, and environment.</li>
+        <li><a href="https://www.cdc.gov/physical-activity-basics/guidelines/adults.html" target="_blank" rel="noopener noreferrer">CDC — Physical Activity Guidelines for Adults.</a><br>General guidance on physical activity for adults.</li>
+        <li><a href="https://www.myplate.gov/" target="_blank" rel="noopener noreferrer">U.S. Department of Agriculture — MyPlate.</a><br>General nutrition education and meal-planning resources.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <span class="eyebrow">Your next step</span>
+        <h2>Pick one thing to explore.</h2>
+        <p>Learn more about sleep, find food resources, try planning a few meals, or explore professional support. Start where you are, and return to this guide whenever you need it.</p>
+      </div>
+      <a class="btn btn-primary" href="#resources">Explore resources <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#home" style="color:white"><span class="brand-mark">BTHO</span><span class="brand-text">BTHO Obesity<small style="color:#e0cbd2">Aggie wellness guide</small></span></a>
+        <p>Knowledge. Healthy habits. Aggie resources.</p>
+      </div>
+      <div>
+        <strong>Explore the guide</strong>
+        <div class="footer-links" style="margin-top:10px">
+          <a href="#learn">Learn</a><a href="#myths">Myths &amp; facts</a><a href="#habits">Healthy habits</a><a href="#resources">Resources</a><a href="#sources">Sources</a>
+        </div>
+      </div>
+    </div>
+    <div class="disclaimer"><strong>Educational disclaimer:</strong> This is a student-developed website prototype for educational purposes. It is not an official Texas A&amp;M University website, does not constitute medical advice, and does not replace evaluation or treatment by a qualified healthcare professional. University affiliation, endorsement, and inclusion in course syllabi have not been established. Information and links should be reviewed regularly for accuracy and availability.</div>
+  </div>
+</footer>
+<button class="back-top" id="backTop" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+(function(){
+  const menuButton = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  menuButton.addEventListener('click', function(){
+    const open = nav.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.textContent = open ? '✕ Close' : '☰ Menu';
+  });
+  nav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded','false');
+      menuButton.textContent='☰ Menu';
+    });
+  });
+  document.querySelectorAll('.myth button').forEach(function(button){
+    button.addEventListener('click', function(){
+      const answer = button.nextElementSibling;
+      const open = answer.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      button.querySelector('.plus').textContent = open ? '−' : '＋';
+    });
+  });
+  const search = document.getElementById('resourceSearch');
+  const cards = Array.from(document.querySelectorAll('.resource-card'));
+  const noResults = document.getElementById('noResults');
+  search.addEventListener('input', function(){
+    const term = search.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(function(card){
+      const text = (card.innerText + ' ' + (card.dataset.search || '')).toLowerCase();
+      const match = text.includes(term);
+      card.hidden = !match;
+      if(match) shown++;
+    });
+    noResults.style.display = shown ? 'none' : 'block';
+  });
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', function(){
+    backTop.classList.toggle('visible', window.scrollY > 500);
+  }, {passive:true});
+  backTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
